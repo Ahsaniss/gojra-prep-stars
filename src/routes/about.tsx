@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { Target, Eye, Heart, Award } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <Layout>
-      <PageHero title="About ACME" subtitle="Building futures through quality education and conceptual clarity." />
+      <PageHero title="About ACME" subtitle="Building futures through quality education and conceptual clarity." background={bgGojra} />
       <section className="container mx-auto px-4 py-16 grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-6">
           <h2 className="text-3xl font-bold">Our Story</h2>

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { Target, BookOpen, Users, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/programs")({
@@ -33,7 +34,7 @@ const programs = [
 function Programs() {
   return (
     <Layout>
-      <PageHero title="Our Programs" subtitle="Structured, syllabus-aligned and outcome-driven preparation paths." />
+      <PageHero title="Our Programs" subtitle="Structured, syllabus-aligned and outcome-driven preparation paths." background={bgGojra} />
       <section className="container mx-auto px-4 py-16 space-y-10">
         {programs.map((p, i) => (
           <div key={p.name} className={`grid lg:grid-cols-2 gap-8 items-center ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>

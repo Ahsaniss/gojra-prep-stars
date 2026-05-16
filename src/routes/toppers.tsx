@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { Award } from "lucide-react";
 
 export const Route = createFileRoute("/toppers")({
@@ -24,7 +25,7 @@ const toppers = [
 function Toppers() {
   return (
     <Layout>
-      <PageHero title="Our Toppers" subtitle="Their hard work, our mentorship — these are the results." />
+      <PageHero title="Our Toppers" subtitle="Their hard work, our mentorship — these are the results." background={bgGojra} />
       <section className="container mx-auto px-4 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {toppers.map((t) => (

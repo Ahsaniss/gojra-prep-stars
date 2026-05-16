@@ -86,3 +86,8 @@
   }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
 }
+
+/* Hide Lovable.dev dev-only UI that may be injected into the page during local development */
+[class*="lovable"], [id*="lovable"], [class*="lovable-"], [data-lovable], [data-lovely], .lovable, .lovable-badge, .lovable-icon {
+  display: none !important;
+}

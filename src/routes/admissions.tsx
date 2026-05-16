@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 
@@ -24,7 +25,7 @@ function Admissions() {
   const [sent, setSent] = useState(false);
   return (
     <Layout>
-      <PageHero title="Admissions Open" subtitle="Session 2026 — Apply online and secure your seat today." />
+      <PageHero title="Admissions Open" subtitle="Session 2026 — Apply online and secure your seat today." background={bgGojra} />
       <section className="container mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12">
         <div>
           <h2 className="text-2xl font-bold mb-4">Mark-Based Scholarships</h2>

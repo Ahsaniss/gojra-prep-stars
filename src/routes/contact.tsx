@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import { useState } from "react";
 
@@ -17,7 +18,7 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <Layout>
-      <PageHero title="Get in Touch" subtitle="Questions about admissions, scholarships or programs? We're here to help." />
+      <PageHero title="Get in Touch" subtitle="Questions about admissions, scholarships or programs? We're here to help." background={bgGojra} />
       <section className="container mx-auto px-4 py-16 grid lg:grid-cols-2 gap-10">
         <div className="space-y-5">
           {[

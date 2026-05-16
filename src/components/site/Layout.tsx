@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -22,16 +23,39 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageHero({ title, subtitle }: { title: string; subtitle?: string }) {
+export function PageHero({ title, subtitle, background, cta }: { title: string; subtitle?: string; background?: string; cta?: boolean | { label?: string; to?: string } }) {
   return (
-    <section className="relative bg-primary text-primary-foreground overflow-hidden">
-      <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(circle at 20% 50%, var(--gold), transparent 50%)" }} />
-      <div className="container mx-auto px-4 py-16 md:py-24 relative">
-        <div className="inline-block px-3 py-1 rounded-full bg-gold/20 text-gold text-xs font-semibold uppercase tracking-widest mb-4">
-          ACME Gojra Campus
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-3">{title}</h1>
-        {subtitle && <p className="text-lg text-primary-foreground/80 max-w-2xl">{subtitle}</p>}
+    <section className={`relative overflow-hidden ${background ? "min-h-[280px] sm:min-h-[360px] md:min-h-[460px] lg:min-h-[560px]" : "bg-primary text-primary-foreground"}`}>
+      {background && (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${background})` }}
+          aria-hidden
+        />
+      )}
+      <div className={`absolute inset-0 ${background ? "bg-[rgba(2,6,23,0.7)] md:bg-[rgba(2,6,23,0.55)]" : ""}`} />
+      <div className="container mx-auto px-4 py-12 md:py-24 relative z-10">
+        <div className="hidden sm:inline-block px-3 py-1 rounded-full bg-gold/20 text-gold text-xs font-semibold uppercase tracking-widest mb-4">
+            ACME Gojra Campus
+          </div>
+          <h1
+            className={`font-bold mb-3 ${background ? "text-gold text-3xl sm:text-4xl md:text-5xl lg:text-6xl" : "text-4xl md:text-5xl text-primary-foreground"}`}
+            style={background ? { textShadow: "0 6px 20px rgba(0,0,0,0.6)" } : undefined}
+          >
+            {title}
+          </h1>
+          {subtitle && (
+            <p className={`max-w-2xl ${background ? "text-white/90 text-base sm:text-lg" : "text-primary-foreground/80 text-lg"}`} style={background ? { textShadow: "0 3px 12px rgba(0,0,0,0.45)" } : undefined}>
+              {subtitle}
+            </p>
+          )}
+          {background && cta !== false && (
+            <div className="mt-6">
+              <Link to={(typeof cta === "object" && cta.to) || "/admissions"} className="inline-block bg-gold text-gold-foreground font-semibold px-5 py-3 rounded-md shadow-[var(--shadow-gold)] hover:opacity-95">
+                {(typeof cta === "object" && cta.label) || "Apply Online"}
+              </Link>
+            </div>
+          )}
       </div>
     </section>
   );

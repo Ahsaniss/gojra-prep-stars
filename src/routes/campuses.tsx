@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/campuses")({
@@ -21,7 +22,7 @@ const campuses = [
 function Campuses() {
   return (
     <Layout>
-      <PageHero title="Our Campuses" subtitle="Three locations across Pakistan, one standard of excellence." />
+      <PageHero title="Our Campuses" subtitle="Three locations across Pakistan, one standard of excellence." background={bgGojra} />
       <section className="container mx-auto px-4 py-16 grid md:grid-cols-3 gap-6">
         {campuses.map((c) => (
           <div key={c.name} className={`rounded-2xl p-7 border ${c.featured ? "bg-primary text-primary-foreground border-gold" : "bg-card"}`}>

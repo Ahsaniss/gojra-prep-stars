@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
+import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
 
 export const Route = createFileRoute("/faculty")({
   head: () => ({
@@ -23,7 +24,7 @@ const faculty = [
 function Faculty() {
   return (
     <Layout>
-      <PageHero title="Our Faculty" subtitle="Experienced educators committed to your success." />
+      <PageHero title="Our Faculty" subtitle="Experienced educators committed to your success." background={bgGojra} />
       <section className="container mx-auto px-4 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {faculty.map((f) => (
