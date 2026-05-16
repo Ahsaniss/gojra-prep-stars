@@ -11,6 +11,7 @@ type AppEntry = {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistDir = path.resolve(__dirname, "../dist/client");
+const publicDir = path.resolve(__dirname, "../public");
 
 const contentTypes: Record<string, string> = {
   ".css": "text/css; charset=utf-8",
@@ -55,9 +56,13 @@ function staticFilePathFromRequest(pathname: string): string | null {
   if (!isStatic) return null;
 
   const relative = pathname.replace(/^\/+/, "");
-  const absolute = path.resolve(clientDistDir, relative);
-  if (!absolute.startsWith(clientDistDir)) return null;
-  return absolute;
+  const clientPath = path.resolve(clientDistDir, relative);
+  if (clientPath.startsWith(clientDistDir)) return clientPath;
+
+  const publicPath = path.resolve(publicDir, relative);
+  if (publicPath.startsWith(publicDir)) return publicPath;
+
+  return null;
 }
 
 async function tryServeStatic(req: any): Promise<Response | null> {
@@ -65,24 +70,29 @@ async function tryServeStatic(req: any): Promise<Response | null> {
   if (method !== "GET" && method !== "HEAD") return null;
 
   const pathname = getPathname(req);
-  const absolutePath = staticFilePathFromRequest(pathname);
-  if (!absolutePath) return null;
+  const relative = pathname.replace(/^\/+/, "");
+  const candidates = [path.resolve(clientDistDir, relative), path.resolve(publicDir, relative)];
 
-  try {
-    const data = await readFile(absolutePath);
-    const ext = path.extname(absolutePath).toLowerCase();
-    const contentType = contentTypes[ext] ?? "application/octet-stream";
+  for (const absolutePath of candidates) {
+    if (!absolutePath.startsWith(clientDistDir) && !absolutePath.startsWith(publicDir)) continue;
+    try {
+      const data = await readFile(absolutePath);
+      const ext = path.extname(absolutePath).toLowerCase();
+      const contentType = contentTypes[ext] ?? "application/octet-stream";
 
-    return new Response(method === "HEAD" ? null : data, {
-      status: 200,
-      headers: {
-        "content-type": contentType,
-        "cache-control": "public, max-age=31536000, immutable",
-      },
-    });
-  } catch {
-    return null;
+      return new Response(method === "HEAD" ? null : data, {
+        status: 200,
+        headers: {
+          "content-type": contentType,
+          "cache-control": "public, max-age=31536000, immutable",
+        },
+      });
+    } catch {
+      continue;
+    }
   }
+
+  return null;
 }
 
 function toRequest(req: any): Request {
