@@ -15,8 +15,12 @@
       "destination": "/api"
     },
     {
-      "source": "^/(?!api/)(.*)$",
-      "destination": "/api/$1"
+      "source": "/assets/:path*",
+      "destination": "/api/assets/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/api/:path*"
     }
   ]
 }
