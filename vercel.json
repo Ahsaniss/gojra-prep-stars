@@ -9,14 +9,14 @@
       "includeFiles": "dist/**"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/$",
-      "dest": "/api"
+      "source": "/",
+      "destination": "/api"
     },
     {
-      "src": "^/(.*)$",
-      "dest": "/api/$1"
+      "source": "^/(?!api/)(.*)$",
+      "destination": "/api/$1"
     }
   ]
 }
