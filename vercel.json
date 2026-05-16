@@ -1,19 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
+  "functions": {
+    "api/index.ts": {
+      "runtime": "@vercel/node",
+      "includeFiles": "dist/**"
+    },
+    "api/[...path].ts": {
+      "runtime": "@vercel/node",
+      "includeFiles": "dist/**"
+    }
+  },
   "rewrites": [
-    {
-      "source": "/assets/(.*)",
-      "destination": "/dist/client/assets/$1"
-    },
-    {
-      "source": "/favicon.ico",
-      "destination": "/dist/client/favicon.ico"
-    },
-    {
-      "source": "/(.*\\..*)",
-      "destination": "/dist/client/$1"
-    },
     {
       "source": "/",
       "destination": "/api"
