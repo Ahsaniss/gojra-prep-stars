@@ -34,9 +34,16 @@ async function getAppEntry(): Promise<AppEntry> {
 }
 
 function getPathname(req: any): string {
+  const routeParam = req.query?.path;
+  const resolvedPath = Array.isArray(routeParam)
+    ? `/${routeParam.join("/")}`
+    : typeof routeParam === "string" && routeParam.length > 0
+      ? `/${routeParam}`
+      : req.url ?? "/";
+
   const proto = req.headers?.["x-forwarded-proto"] ?? "https";
   const host = req.headers?.["x-forwarded-host"] ?? req.headers?.host ?? "localhost";
-  const url = new URL(req.url ?? "/", `${proto}://${host}`);
+  const url = new URL(resolvedPath, `${proto}://${host}`);
   let pathname = decodeURIComponent(url.pathname || "/");
   if (pathname === "/api") pathname = "/";
   if (pathname.startsWith("/api/")) pathname = pathname.slice(4);
@@ -79,9 +86,16 @@ async function tryServeStatic(req: any): Promise<Response | null> {
 }
 
 function toRequest(req: any): Request {
+  const routeParam = req.query?.path;
+  const resolvedPath = Array.isArray(routeParam)
+    ? `/${routeParam.join("/")}`
+    : typeof routeParam === "string" && routeParam.length > 0
+      ? `/${routeParam}`
+      : req.url ?? "/";
+
   const proto = req.headers?.["x-forwarded-proto"] ?? "https";
   const host = req.headers?.["x-forwarded-host"] ?? req.headers?.host ?? "localhost";
-  const url = new URL(req.url ?? "/", `${proto}://${host}`);
+  const url = new URL(resolvedPath, `${proto}://${host}`);
   const method = req.method ?? "GET";
 
   const headers = new Headers();
