@@ -15,10 +15,6 @@
       "destination": "/api"
     },
     {
-      "source": "/assets/:path*",
-      "destination": "/api/assets/:path*"
-    },
-    {
       "source": "/:path*",
       "destination": "/api/:path*"
     }
