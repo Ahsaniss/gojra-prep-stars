@@ -3,11 +3,9 @@
   "buildCommand": "npm run build",
   "functions": {
     "api/index.ts": {
-      "runtime": "@vercel/node",
       "includeFiles": "dist/**"
     },
     "api/[...path].ts": {
-      "runtime": "@vercel/node",
       "includeFiles": "dist/**"
     }
   },
