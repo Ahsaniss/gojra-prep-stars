@@ -3,10 +3,10 @@
   "buildCommand": "npm run build && npm run vercel:prepare",
   "functions": {
     "api/index.ts": {
-      "includeFiles": "dist/**"
+      "includeFiles": ["dist/**", "public/**"]
     },
     "api/[...path].ts": {
-      "includeFiles": "dist/**"
+      "includeFiles": ["dist/**", "public/**"]
     }
   },
   "routes": [
