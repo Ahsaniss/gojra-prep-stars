@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && npm run vercel:prepare",
   "functions": {
     "api/index.ts": {
       "includeFiles": "dist/**"
@@ -9,14 +9,17 @@
       "includeFiles": "dist/**"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
-      "destination": "/api"
+      "handle": "filesystem"
     },
     {
-      "source": "/:path*",
-      "destination": "/api/:path*"
+      "src": "^/$",
+      "dest": "/api"
+    },
+    {
+      "src": "^/(.*)$",
+      "dest": "/api/$1"
     }
   ]
 }
