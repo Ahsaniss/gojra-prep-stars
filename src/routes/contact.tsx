@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/site/Layout";
-import bgGojra from "@/assets/WhatsApp Image 2026-05-16 at 10.34.08 AM.jpeg";
+import bgGojra from "@/assets/campus-bg.jpeg";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import { useState } from "react";
 
