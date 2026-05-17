@@ -22,7 +22,7 @@ async function main() {
   }
 
   await mkdir(publicDir, { recursive: true });
-  await rm(publicAssets, { recursive: true, force: true });
+  await mkdir(publicAssets, { recursive: true });
   await cp(path.join(clientDist, "assets"), publicAssets, { recursive: true });
 
   const faviconSrc = path.join(clientDist, "favicon.ico");
